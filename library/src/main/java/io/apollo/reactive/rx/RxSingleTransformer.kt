@@ -18,10 +18,12 @@ class RxSingleTransformer<T>(task: Task<T>, val emitter: SingleEmitter<T>) : OnS
     }
 
     override fun onSuccess(result: T) {
-        emitter.onSuccess(result)
+        if (!emitter.isDisposed)
+            emitter.onSuccess(result)
     }
 
     override fun onFailure(exception: Exception) {
-        emitter.onError(exception)
+        if (!emitter.isDisposed)
+            emitter.onError(exception)
     }
 }

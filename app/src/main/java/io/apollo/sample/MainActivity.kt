@@ -9,6 +9,8 @@ import io.apollo.reactive.livedata.LiveApolloAuth
 import io.apollo.reactive.livedata.LiveResource
 import io.apollo.reactive.livedata.LiveResourceStatus
 import io.apollo.reactive.rx.RxApolloAuth
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,17 +41,18 @@ class MainActivity : AppCompatActivity() {
 
         liveAuth.signInAnonymously().observe(this, authObserver)
 
-//        val email = "levi.albuquerque@gmail.com"
-//        val password = "levi1234"
-//        rxAuth
-//                .createUserWithEmailAndPassword(email, password)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({ result ->
-//                    Log.d("MainActivity", result.user.uid)
-//                }, { error ->
-//                    error.printStackTrace()
-//                })
+        val email = "levi.albuquerque@gmail.com"
+        val password = "levi1234"
+        val disobsable = rxAuth
+                .createUserWithEmailAndPassword(email, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ result ->
+                    Log.d("MainActivity", result.user.uid)
+                }, { error ->
+                    error.printStackTrace()
+                })
+
 
 //        rxAuth
 //                .signInWithEmailAndPassword(email, password)

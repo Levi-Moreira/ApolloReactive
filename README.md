@@ -10,7 +10,7 @@ Right now the library provides callbacks only for the Authentication methods.
 
 To initialize the wrapper you simply add the initialization to your application class:
 
-```
+```kotlin
 class ApolloSampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -21,7 +21,7 @@ class ApolloSampleApplication : Application() {
 
 To use it you simply call the getInstance() method just like firebase to create an object of the desired class and then you can call the normal firebase auth methods:
 
-```
+```kotlin
 val rxAuth = RxApolloAuth.getInstance()
 rxAuth
   .signInAnonymously()
@@ -36,7 +36,7 @@ rxAuth
 
 To use the LiveData instance you simply do (you need to setup the lifecycle owner as well):
 
-```
+```kotlin
 val liveAuth = LiveApolloAuth.getInstance()
 liveAuth.signInAnonymously().observe(this, Observer { 
     //result

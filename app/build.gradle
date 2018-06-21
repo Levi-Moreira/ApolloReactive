@@ -22,21 +22,15 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.firebaseui:firebase-ui-auth:3.3.1'
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.google.firebase:firebase-auth:$rootProject.firebaseServices"
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+    implementation "com.google.firebase:firebase-auth:$rootProject.firebaseAuth"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava"
     implementation "android.arch.lifecycle:livedata:$rootProject.livedata"
-    implementation "com.google.firebase:firebase-database:$rootProject.firebaseServices"
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.livedata"
     testImplementation "junit:junit:$rootProject.junitVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"

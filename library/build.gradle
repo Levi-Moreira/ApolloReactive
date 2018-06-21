@@ -25,18 +25,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.google.firebase:firebase-auth:$rootProject.firebaseServices"
+    implementation "com.google.firebase:firebase-auth:$rootProject.firebaseAuth"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava"
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
     implementation "android.arch.lifecycle:livedata:$rootProject.livedata"
-
-    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.livedata"
-
     testImplementation "junit:junit:$rootProject.junitVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 

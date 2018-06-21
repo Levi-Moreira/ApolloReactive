@@ -1,29 +1,45 @@
 package io.apollo.reactive.rx
 
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
-import io.reactivex.SingleEmitter
-import java.lang.Exception
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import io.reactivex.Single
 
 /**
  * Created by levi on 11/03/18.
  */
+fun Task<AuthResult>.toRxSingle(): Single<AuthResult> {
+    return Single.create { emitter ->
+        this.addOnSuccessListener { result ->
+            if (!emitter.isDisposed)
+                emitter.onSuccess(result)
+        }
 
-class RxSingleTransformer<T>(task: Task<T>, val emitter: SingleEmitter<T>) : OnSuccessListener<T>, OnFailureListener {
-
-    init {
-        task.addOnFailureListener(this)
-        task.addOnSuccessListener(this)
-    }
-
-    override fun onSuccess(result: T) {
-        if (!emitter.isDisposed)
-            emitter.onSuccess(result)
-    }
-
-    override fun onFailure(exception: Exception) {
-        if (!emitter.isDisposed)
-            emitter.onError(exception)
+        this.addOnFailureListener { error ->
+            if (!emitter.isDisposed)
+                emitter.onError(error)
+        }
     }
 }
+
+fun FirebaseAuth.rxSignInWithEmailAndPassword(email: String, password: String): Single<AuthResult> {
+    return this.signInWithEmailAndPassword(email, password).toRxSingle()
+}
+
+fun FirebaseAuth.rxSignInAnonimously(): Single<AuthResult> {
+    return this.signInAnonymously().toRxSingle()
+}
+
+fun FirebaseAuth.rxSignInWithCustomToken(token: String): Single<AuthResult> {
+    return this.signInWithCustomToken(token).toRxSingle()
+}
+
+fun FirebaseAuth.rxSignInWithCredential(credential: AuthCredential): Single<AuthResult> {
+    return this.signInWithCredential(credential).toRxSingle()
+}
+
+fun FirebaseAuth.rxCreateUserWithEmailAndPassword(email: String, password: String): Single<AuthResult> {
+    return this.createUserWithEmailAndPassword(email, password).toRxSingle()
+}
+
